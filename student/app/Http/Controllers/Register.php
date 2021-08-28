@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\student;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Hash;
 class Register extends Controller
 {
     //
     function addData(Request $req)
     {
-
         $req->validate([
             'name' => 'required | max:10',
             'password' => 'required |min:5',
@@ -27,7 +26,7 @@ class Register extends Controller
         $student->name = $req->name;
         $student->email = $req->email;
         $student->address = $req->address;
-        $student->password = $req->password;
+        $student->password = Hash::make($req->password);
         $student->mobile = $req->mobile;
         $student->gender = $req->gender;
         $student->description = $req->description;
@@ -44,13 +43,16 @@ class Register extends Controller
 
         $student->save();
         //    return redirect('add');
-        return redirect('list')->with('message', 'Insert Data Successfully');
-        return redirect('list');
+        // return redirect('auth/login')->with('message', 'Registertion Successfully');
+        return back()->with('message', 'Registertion Successfully');
+        return redirect('auth/login');
     }
     function display_data()
     {
-        $data = student::paginate(15);
-        return view('list', ['students' => $data]);
+        $data = ['LoggedUserInfo'=>student::where('id','=', session('LoggedUser'))->first()];
+        //$data = student::paginate(15);
+        // return view('list', ['students' => $data]);
+        return view('list',$data);
     }
 
     function showData($id)
@@ -66,7 +68,7 @@ class Register extends Controller
         $data->name = $req->name;
         $data->email = $req->email;
         $data->address = $req->address;
-        $data->password = $req->password;
+        $data->password = Hash::make($req->password);
         $data->mobile = $req->mobile;
         $data->gender = $req->gender;
         $data->description = $req->description;
@@ -90,6 +92,7 @@ class Register extends Controller
 
         $data->save();
         return redirect('list')->with('message', 'Upadate Successfully');
+        $data = ['LoggedUserInfo'=>student::where('id','=', session('LoggedUser'))->first()];
         return redirect('list');
     }
     function delete(Request $req ,$id)

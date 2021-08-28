@@ -9,6 +9,12 @@
 <div class="container"> 
     
             <form role="form" class="form-horizontal" action="add" method="POST" enctype="multipart/form-data">
+                <a class="btn btn-primary float-right" href="{{ route('login') }}">sign in</a><br>
+                @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
                 <h3>Register Form</h3>
                 @csrf
                 <div class="form-group">
@@ -107,6 +113,8 @@
                 </div>
             </div>
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
+                <br>
+                <a href="{{ route('login') }}">I already have an account, sign in</a>
             </form>
 </div>
 
@@ -141,3 +149,6 @@
     width: 100%;
 }
 </style>
+<script>
+    $('div.alert').delay(5000).slideUp(300);
+    </script>

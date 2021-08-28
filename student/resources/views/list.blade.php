@@ -23,7 +23,9 @@
         <div class="col-md-12">
             <h4 class="text-center">Student Data</h4>
            <div >
-            <a class="btn btn-primary float-left" href="{{ 'add' }}">Add Data</a>
+            {{-- <a class="btn btn-primary float-left" href="{{ 'add' }}">Add Data</a> --}}
+           
+            <a class="btn btn-primary float-right" href="{{ route('logout') }}">Logout</a>
            </div>
             <div class="table-responsive">
 
@@ -45,33 +47,34 @@
                         <th>Delete</th>
                     </thead>
                     <tbody>
-                        @foreach ($students as $item)
+                     
+                        {{-- @foreach ($students as $item) --}}
                             <tr>
-                                <td>{{ $item['id'] }}</td>
-                                <td>{{ $item['name'] }}</td>
-                                <td>{{ $item['email'] }}</td>
-                                <td>{{ $item['address'] }}</td>
-                                <td>{{ $item['mobile'] }}</td>
-                                <td>{{ $item['gender'] }}</td>
-                                <td>{{ $item['hobby'] }}</td>
-                                <td>{{ $item['description'] }}</td>
-                                <td><img src="{{ url('profile_photo') . '/' . $item['image'] }}" height="60px"
+                                <td>{{ $LoggedUserInfo['id'] }}</td>
+                                <td>{{ $LoggedUserInfo['name'] }}</td>
+                                <td>{{ $LoggedUserInfo['email'] }}</td>
+                                <td>{{ $LoggedUserInfo['address'] }}</td>
+                                <td>{{ $LoggedUserInfo['mobile'] }}</td>
+                                <td>{{ $LoggedUserInfo['gender'] }}</td>
+                                <td>{{ $LoggedUserInfo['hobby'] }}</td>
+                                <td>{{ $LoggedUserInfo['description'] }}</td>
+                                <td><img src="{{ url('profile_photo') . '/' . $LoggedUserInfo['image'] }}" height="60px"
                                         width="60px" alt=""></td>
                                 <td>
                                     {{-- <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button> --}}
-                                    <a class="btn btn-primary btn-xs" href={{ 'edit/' . $item['id'] }}><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-primary btn-xs" href={{ 'edit/' . $LoggedUserInfo['id'] }}><span class="glyphicon glyphicon-pencil"></span></a>
                                 </td>
                                 <td>
                                     {{-- <p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
                                     </p> --}}
-                                    <a class="btn btn-danger btn-xs" href={{ 'delete/' . $item['id'] }}><span class="glyphicon glyphicon-trash"></span></span></a>
+                                    <a class="btn btn-danger btn-xs" href={{ 'delete/' . $LoggedUserInfo['id'] }}><span class="glyphicon glyphicon-trash"></span></span></a>
                                 </td>
                             </tr>
-                        @endforeach
+                        {{-- @endforeach --}}
                     </tbody>
 
                 </table>
-
+                
                 <div class="clearfix"></div>
                 {{-- <ul class="pagination pull-right">
                     <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
