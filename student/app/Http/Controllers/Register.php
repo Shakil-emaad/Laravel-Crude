@@ -52,6 +52,7 @@ class Register extends Controller
         $data = ['LoggedUserInfo'=>student::where('id','=', session('LoggedUser'))->first()];
         //$data = student::paginate(15);
         // return view('list', ['students' => $data]);
+        
         return view('list',$data);
     }
 
